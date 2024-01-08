@@ -13,8 +13,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 class callAPI {
-private static final String IMAGE1 = "img/aloe1.jpg";
-private static final String IMAGE2 = "img/aloe2.jpg";
+private static final String IMAGE1 = "img/1.jpg";
+private static final String IMAGE2 = "img/2.jpg";
 
 private static final String PROJECT = "all";
 private static final String URL = "https://my-api.plantnet.org/v2/identify/" + PROJECT + "?api-key=2b10LhD3grOwCbkvSKtnGw58s";
