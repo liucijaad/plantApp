@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 
@@ -15,14 +16,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-class callAPI {
-    //Images to be given to API. Mind the naming.
-    private static final String IMAGE1 = "img/1.jpg";
-    private static final String IMAGE2 = "img/2.jpg";
-
-    //API call parameters.
-    private static final String PROJECT = "all";
-    private static final String URL = "https://my-api.plantnet.org/v2/identify/" + PROJECT + "?api-key=2b10LhD3grOwCbkvSKtnGw58s";
+class plantIdentify {
 
     //Function to find scientific name of the plant species based on images submitted. Returns latin name of the plant species.
     static String findScientificName() {
@@ -30,8 +24,9 @@ class callAPI {
         //Set variable for scientific name as N/A in case plant recognition fails.
         String scientificName = "N/A";
 
-        File image1 = new File(IMAGE1);
-        File image2 = new File(IMAGE2);
+        //Images to be given to API. Mind the naming.
+        File image1 = new File("img/1.jpg");
+        File image2 = new File("img/2.jpg");
 
         //Create HTTPEntity for API request.
         HttpEntity entity = MultipartEntityBuilder.create()
@@ -40,13 +35,13 @@ class callAPI {
             .build();
         
         //Prepare to POST HTTP request.
-        HttpPost request = new HttpPost(URL);
+        HttpPost request = new HttpPost("https://my-api.plantnet.org/v2/identify/" + "all" + "?api-key=2b10LhD3grOwCbkvSKtnGw58s");
         request.setEntity(entity);
         HttpClient client = HttpClientBuilder.create().build();
         HttpResponse response;
 
         //Try to get a response from API.
-        //Get response from API and go through JSON response to find first (best matching) result and get scientific name from it.
+        //Go through JSON response to find first (best matching) result and get scientific name from it.
         try {
             response = client.execute(request);
             String jsonString = EntityUtils.toString(response.getEntity());
@@ -61,7 +56,14 @@ class callAPI {
 
         return scientificName;
     }
+
+    static ArrayList<String> findEnvConditions(String scientificName) {
+        ArrayList<String> envConditions = new ArrayList<>();
+
+        return envConditions;
+    }
     public static void main(String[] args) {
         System.out.println(findScientificName());
+        System.out.println(findEnvConditions(findScientificName()));
     }
 }
