@@ -46,6 +46,7 @@ class callAPI {
         HttpResponse response;
 
         //Try to get a response from API.
+        //Get response from API and go through JSON response to find first (best matching) result and get scientific name from it.
         try {
             response = client.execute(request);
             String jsonString = EntityUtils.toString(response.getEntity());
