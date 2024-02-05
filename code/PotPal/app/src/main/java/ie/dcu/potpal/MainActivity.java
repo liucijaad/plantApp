@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 File imageFile = files[0];
 
                 // Call the PlantIdentify method with the captured image
-                return PlantIdentify.findPlant(imageFile);
+                return PlantIdentify.findPlantNames();//(imageFile);
             }
             return null;
         }
