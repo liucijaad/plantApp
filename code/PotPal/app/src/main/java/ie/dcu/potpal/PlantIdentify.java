@@ -8,14 +8,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.io.File;
 import java.io.IOException;
 
 class PlantIdentify {
 
-	static JSONObject findPlantNames(){ //(File imageFile) {
+	static List<List<String>> findPlantNames(){ //(File imageFile) {
+
+		//Prepare to store results.
+		List<List<String>> results =  new ArrayList<>();
+		List<String> firstResult = new ArrayList<>();
+		List<String> secondResult = new ArrayList<>();
+		List<String> thirdResult = new ArrayList<>();
+
 		JSONObject jsonObj = new JSONObject();
-		String scientificName = "N/A";
 
 		//File for testing purposes.
 		File imageFile = new File("img/1.jpg");
@@ -39,7 +47,7 @@ class PlantIdentify {
 
 		// Prepare to POST HTTP request.
 		Request request = new Request.Builder()
-				.url("https://my-api.plantnet.org/v2/identify/all?api-key=2b10LhD3grOwCbkvSKtnGw58s")
+				.url("https://my-api.plantnet.org/v2/identify/all?api-key=2b10AOILklY0vvHmKDYT1MqLye")
 				.post(requestBody)
 				.build();
 
@@ -51,11 +59,24 @@ class PlantIdentify {
 				String jsonString = response.body().string();
 				jsonObj = new JSONObject(jsonString);
 				Log.d("PlantIdentify", "JSON: " + jsonObj);
-				JSONArray results = jsonObj.getJSONArray("results");
-				JSONObject firstResult = results.getJSONObject(0);
-				JSONObject species = firstResult.getJSONObject("species");
-				scientificName = species.getString("scientificNameWithoutAuthor");
-				Log.d("PlantIdentify", "Scientific Name: " + scientificName);
+				JSONArray jsonResults = jsonObj.getJSONArray("results");
+				JSONObject firstJsonResult = jsonResults.getJSONObject(0);
+				JSONObject secondJsonResult = jsonResults.getJSONObject(1);
+				JSONObject thirdJsonResult = jsonResults.getJSONObject(2);
+				firstResult.add(firstJsonResult.getJSONObject("species").getString("scientificNameWithoutAuthor"));
+				secondResult.add(secondJsonResult.getJSONObject("species").getString("scientificNameWithoutAuthor"));
+				thirdResult.add(thirdJsonResult.getJSONObject("species").getString("scientificNameWithoutAuthor"));
+				JSONArray firstCommonNames = firstJsonResult.getJSONObject("species").getJSONArray("commonNames");
+				JSONArray secondCommonNames = secondJsonResult.getJSONObject("species").getJSONArray("commonNames");
+				JSONArray thirdCommonNames = thirdJsonResult.getJSONObject("species").getJSONArray("commonNames");
+				for(int i=0; i<3; i++) {
+					firstResult.add(firstCommonNames.getString(i));
+					secondResult.add(secondCommonNames.getString(i));
+					thirdResult.add(thirdCommonNames.getString(i));
+				}
+				results.add(firstResult);
+				results.add(secondResult);
+				results.add(thirdResult);
 			} else {
 				Log.e("PlantIdentify", "Failed to get response from the API. Response Code: " + response.code());
 			}
@@ -63,7 +84,7 @@ class PlantIdentify {
 			e.printStackTrace();
 		}
 
-		return jsonObj;
+		return results;
 	}
 
 }
