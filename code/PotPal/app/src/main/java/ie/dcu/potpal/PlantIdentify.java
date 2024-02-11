@@ -78,8 +78,17 @@ class PlantIdentify {
 				for(int i=0; i<thirdCommonNames.length(); i++) {
 					thirdResult.add(thirdCommonNames.getString(i));
 				}
+				firstResult.add(firstJsonResult.getJSONArray("images").getJSONObject(0).getJSONObject("url").getString("o"));
+				firstResult.add(firstJsonResult.getJSONArray("images").getJSONObject(0).getJSONObject("url").getString("m"));
+				firstResult.add(firstJsonResult.getJSONArray("images").getJSONObject(0).getJSONObject("url").getString("s"));
 				results.add(firstResult);
+				secondResult.add(secondJsonResult.getJSONArray("images").getJSONObject(0).getJSONObject("url").getString("o"));
+				secondResult.add(secondJsonResult.getJSONArray("images").getJSONObject(0).getJSONObject("url").getString("m"));
+				secondResult.add(secondJsonResult.getJSONArray("images").getJSONObject(0).getJSONObject("url").getString("s"));
 				results.add(secondResult);
+				thirdResult.add(thirdJsonResult.getJSONArray("images").getJSONObject(0).getJSONObject("url").getString("o"));
+				thirdResult.add(thirdJsonResult.getJSONArray("images").getJSONObject(0).getJSONObject("url").getString("m"));
+				thirdResult.add(thirdJsonResult.getJSONArray("images").getJSONObject(0).getJSONObject("url").getString("s"));
 				results.add(thirdResult);
 			} else {
 				Log.e("PlantIdentify", "Failed to get response from the API. Response Code: " + response.code());
