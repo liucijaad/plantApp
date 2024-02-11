@@ -69,9 +69,13 @@ class PlantIdentify {
 				JSONArray firstCommonNames = firstJsonResult.getJSONObject("species").getJSONArray("commonNames");
 				JSONArray secondCommonNames = secondJsonResult.getJSONObject("species").getJSONArray("commonNames");
 				JSONArray thirdCommonNames = thirdJsonResult.getJSONObject("species").getJSONArray("commonNames");
-				for(int i=0; i<3; i++) {
+				for(int i=0; i<firstCommonNames.length(); i++) {
 					firstResult.add(firstCommonNames.getString(i));
+				}
+				for(int i=0; i<secondCommonNames.length(); i++) {
 					secondResult.add(secondCommonNames.getString(i));
+				}
+				for(int i=0; i<thirdCommonNames.length(); i++) {
 					thirdResult.add(thirdCommonNames.getString(i));
 				}
 				results.add(firstResult);
