@@ -16,7 +16,7 @@ public class DatabaseConnector {
      * @return List of string with plant's latin name, type, sunlight needs, water needs and common names.
      */
     public static List<String> fetchFromDatabase(String plantLatinName) {
-        //List to store fetched data about plant
+        //List to store fetched data about plant.
         List<String> plantData = new ArrayList<>();
         //SQL query to select plant data.
         String query = "SELECT x.* FROM \"Plant Data\" x WHERE `Latin Name` == " + "'" + plantLatinName + "'";
