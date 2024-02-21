@@ -33,10 +33,11 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.plantNameTextView.setText(plants.get(position).getPlantName());
-        holder.environmentTextView.setText(plants.get(position).getEnvironment());
+        holder.plantNameTextView.setText(plants.get(position).getScientificName());
+        holder.commonNamesTextView.setText(plants.get(position).getCommonNames());
         holder.plantTypeTextView.setText(plants.get(position).getType());
-        Glide.with(context).asBitmap().load(plants.get(position).getImageUri()).into(holder.plantImageView);
+
+        Glide.with(context).asBitmap().load(plants.get(position).getPhotoFilePath()).into(holder.plantImageView);
     }
 
     @Override
@@ -52,7 +53,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView plantNameTextView;
-        private TextView environmentTextView;
+        private TextView commonNamesTextView;
         private TextView plantTypeTextView;
         private ImageView plantImageView;
         public ViewHolder(@NonNull View itemView) {
@@ -60,7 +61,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> 
             plantImageView = itemView.findViewById(R.id.plantImageView);
             plantNameTextView = itemView.findViewById(R.id.plantNameTextView);
             plantTypeTextView = itemView.findViewById(R.id.plantTypeTextView);
-            environmentTextView = itemView.findViewById(R.id.environmentTextView);
+            commonNamesTextView = itemView.findViewById(R.id.commonNamesTextView);
 
         }
     }
