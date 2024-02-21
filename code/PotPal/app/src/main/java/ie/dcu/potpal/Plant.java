@@ -1,34 +1,19 @@
 package ie.dcu.potpal;
 
-import java.util.List;
-
 public class Plant {
     private String scientificName;
-    private List<String> commonNames;
-    private String environment;
     private String type;
-    private String imageUri;
-
-    public Plant(String scientificName, List<String> commonNames) {
+    private String sunlight;
+    private String water;
+    private String commonNames;
+    private String photoFilePath;
+    public Plant(String scientificName, String type, String sunlight, String water, String commonNames, String photoFilePath) {
         this.scientificName = scientificName;
+        this.type = type;
+        this.sunlight = sunlight;
+        this.water = water;
         this.commonNames = commonNames;
-        this.environment = "N/A";
-        this.type = "N/A";
-        this.imageUri = "N/A";
-    }
-    public Plant(String scientificName, String environment, String plantType, String imageUri) {
-        this.scientificName = scientificName;
-        this.environment = environment;
-        this.type = plantType;
-        this.imageUri = imageUri;
-    }
-
-    public Plant(String scientificName, List<String> commonNames, String environment, String plantType, String imageUri) {
-        this.scientificName = scientificName;
-        this.commonNames = commonNames;
-        this.environment = environment;
-        this.type = plantType;
-        this.imageUri = imageUri;
+        this.photoFilePath = photoFilePath;
     }
 
     public String getScientificName() {
@@ -39,21 +24,6 @@ public class Plant {
         this.scientificName = scientificName;
     }
 
-    public List<String> getCommonNames() {
-        return commonNames;
-    }
-
-    public void setCommonNames(List<String> commonNames) {
-        this.commonNames = commonNames;
-    }
-    public String getEnvironment() {
-        return environment;
-    }
-
-    public void setEnvironment(String environment) {
-        this.environment = environment;
-    }
-
     public String getType() {
         return type;
     }
@@ -62,11 +32,35 @@ public class Plant {
         this.type = type;
     }
 
-    public String getImageUri() {
-        return imageUri;
+    public String getSunlight() {
+        return sunlight;
     }
 
-    public void setImageUri(String imageUri) {
-        this.imageUri = imageUri;
+    public void setSunlight(String sunlight) {
+        this.sunlight = sunlight;
+    }
+
+    public String getWater() {
+        return water;
+    }
+
+    public void setWater(String water) {
+        this.water = water;
+    }
+
+    public String getCommonNames() {
+        return commonNames;
+    }
+
+    public void setCommonNames(String commonNames) {
+        this.commonNames = commonNames;
+    }
+
+    public String getPhotoFilePath() {
+        return photoFilePath;
+    }
+
+    public void setPhotoFilePath(String photoFilePath) {
+        this.photoFilePath = photoFilePath;
     }
 }
