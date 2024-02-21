@@ -19,6 +19,9 @@
             android:name=".AddPlantActivity"
             android:exported="false" />
         <activity
+            android:name=".ChosenPlantActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name">
