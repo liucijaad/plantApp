@@ -107,4 +107,25 @@ public class DatabaseConnector {
         }
         return plantData;
     }
+
+    /**
+     * Inserts plant data into the database.
+     * @param latinName Plant's latin name. Primary key. Cannot be duplicate in the database.
+     * @param type String of plant's type (ex. Succulent, Cactus, Vine).
+     * @param sunlight String of plant's sunlight needs (ex. Full Sunlight, Partial Shade).
+     * @param water String of plant's water needs (ex. Mesic, Dry Mesic).
+     * @param commonNames String of other common names plant is known by. If unknown, should be N/A.
+     */
+    public static void insertToDatabase(String latinName, String type, String sunlight, String water, String commonNames) {
+        String query = "INSERT INTO \"Plant Data\" VALUES ('" + latinName + "', '" + type + "', '" + sunlight + "', '" + water + "', '" + commonNames + "')";
+        try{
+            Connection conn = DriverManager.getConnection(connectionURL);
+            Statement statement = conn.createStatement();
+            statement.executeUpdate(query);
+            conn.close();
+        }
+        catch (SQLException e) {
+            Log.e( "DatabseConnectorInsert", "Unable to connect to dabase. Error code: " + e.getErrorCode() + " " + e.getMessage());
+        }
+    }
 }
