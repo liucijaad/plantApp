@@ -1,72 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AddPlantActivity">
+    android:layout_height="match_parent">
 
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Image selection -->
-            <ImageView
-                android:id="@+id/imagePlant"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@android:color/darker_gray"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/image_description"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Button to choose image -->
-            <Button
-                android:id="@+id/btnChooseImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/choose_image" />
-
-            <!-- Plant name -->
-            <EditText
-                android:id="@+id/editTextPlantName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/plant_name"
-                android:inputType="textCapWords"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp" />
-
-            <!-- Environment dropdown -->
-            <Spinner
-                android:id="@+id/spinnerEnvironment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:entries="@array/environment_options"
-                android:prompt="@string/select_environment" />
-
-            <!-- Plant type dropdown -->
-            <Spinner
-                android:id="@+id/spinnerPlantType"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:entries="@array/plant_type_options"
-                android:prompt="@string/select_plant_type" />
-
-            <!-- Save button -->
-            <Button
-                android:id="@+id/btnSavePlant"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/save_plant" />
-
-        </LinearLayout>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>
