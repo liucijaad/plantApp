@@ -15,7 +15,7 @@ import java.io.IOException;
 
 class PlantIdentify {
 
-	static List<List<String>> findPlantNames(){ //(File imageFile) {
+	static List<List<String>> findPlantNames(File imageFile){ //(File imageFile) {
 
 		//Prepare to store results.
 		List<List<String>> results =  new ArrayList<>();
@@ -24,9 +24,6 @@ class PlantIdentify {
 		List<String> thirdResult = new ArrayList<>();
 
 		JSONObject jsonObj = new JSONObject();
-
-		//File for testing purposes.
-		File imageFile = new File("img/1.jpg");
 
 		// Log the image file path for debugging
 		Log.d("PlantIdentify", "Image File Path: " + imageFile.getAbsolutePath());
@@ -47,7 +44,7 @@ class PlantIdentify {
 
 		// Prepare to POST HTTP request.
 		Request request = new Request.Builder()
-				.url("https://my-api.plantnet.org/v2/identify/all?api-key=2b10AOILklY0vvHmKDYT1MqLye")
+				.url("https://my-api.plantnet.org/v2/identify/all?api-key=2b10iHt45K2DhpclhX1oGOy8u&include-related-images=true")
 				.post(requestBody)
 				.build();
 
