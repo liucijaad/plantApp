@@ -24,6 +24,8 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,15 +41,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList<Plant> plants = new ArrayList<>();
+        ArrayList<Plant> plants = getChosenPlants();
+
         plantsRecView = findViewById(R.id.plantsRecView);
 
         PlantAdapter adapter = new PlantAdapter(this);
 
-        plants.add(new Plant("Foxglove", "Outside", "Flowering", "https://irishseedsavers.ie/wp-content/uploads/2022/11/Flowers_Foxglove-scaled-e1667476559896.jpg"));
-        plants.add(new Plant("Christmas", "Inside", "Cactus", "https://hips.hearstapps.com/hmg-prod/images/christmas-cactus-1633368132.jpg?crop=1.00xw:0.701xh;0,0.138xh&resize=1200:*"));
-        plants.add(new Plant("Poppy", "Outside", "Flowering", "https://irishseedsavers.ie/wp-content/uploads/2020/07/Poppy-Mix.jpg"));
-        plants.add(new Plant("Ivy", "Inside", "Foliage", "https://gardenerspath.com/wp-content/uploads/2022/03/How-to-Grow-English-Ivy-Indoors-Feature.jpg"));
         adapter.setPlants(plants);
 
         plantsRecView.setAdapter(adapter);
@@ -60,7 +59,30 @@ public class MainActivity extends AppCompatActivity {
                 takePicture();
             }
         });
+    }
 
+    protected void onResume() {
+        super.onResume();
+        // Reload the list of chosen plants when MainActivity is resumed
+        ArrayList<Plant> plants = getChosenPlants();
+        updatePlantList(plants);
+
+        if (plants.isEmpty()) {
+            // Show the placeholder if the list of plants is empty
+            findViewById(R.id.placeholderLayout).setVisibility(View.VISIBLE);
+            plantsRecView.setVisibility(View.GONE);
+        } else {
+            // Hide the placeholder and display the RecyclerView if the list of plants is not empty
+            findViewById(R.id.placeholderLayout).setVisibility(View.GONE);
+            plantsRecView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void updatePlantList(ArrayList<Plant> plants) {
+        PlantAdapter adapter = new PlantAdapter(this);
+        adapter.setPlants(plants);
+        plantsRecView.setAdapter(adapter);
+        plantsRecView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private File photoFile;
@@ -115,26 +137,56 @@ public class MainActivity extends AppCompatActivity {
         new PlantIdentifyTask().execute(imageFile);
     }
 
-    private class PlantIdentifyTask extends AsyncTask<File, Void, JSONObject> {
+    private class PlantIdentifyTask extends AsyncTask<File, Void, List<List<String>>> {
 
         @Override
-        protected JSONObject doInBackground(File... files) {
+        protected List<List<String>> doInBackground(File... files) {
             if (files.length > 0) {
-                // Get the first image file (assuming there's only one image)
                 File imageFile = files[0];
-
-                // Call the PlantIdentify method with the captured image
-                return PlantIdentify.findPlantNames();//(imageFile);
+                return PlantIdentify.findPlantNames(imageFile);
             }
             return null;
         }
 
         @Override
-        protected void onPostExecute(JSONObject result) {
-            // Handle the result in the UI thread (e.g., update UI components or log the result)
-            Log.d("PlantIdentify", "Result: " + result.toString());
+        protected void onPostExecute(List<List<String>> results) {
+            Log.d("PlantIdentify", "Results: " + results);
+
+            if (results != null && !results.isEmpty()) {
+                List<String> FirstPlant = results.get(0);
+                List<String> SecondPlant = results.get(1);
+                List<String> ThirdPlant = results.get(2);
+
+                Intent intent = new Intent(MainActivity.this, AddPlantActivity.class);
+                intent.putExtra("photoFilePath", photoFile.getAbsolutePath());
+                intent.putStringArrayListExtra("FirstPlant", (ArrayList<String>) FirstPlant);
+                intent.putStringArrayListExtra("SecondPlant", (ArrayList<String>) SecondPlant);
+                intent.putStringArrayListExtra("ThirdPlant", (ArrayList<String>) ThirdPlant);
+                startActivity(intent);
+            } else {
+                Log.d("PlantIdentify", "No results available");
+            }
         }
     }
 
+    private ArrayList<Plant> getChosenPlants() {
+        ArrayList<Plant> chosenPlants = new ArrayList<>();
 
+        SharedPreferences sharedPreferences = getSharedPreferences("ChosenPlants", Context.MODE_PRIVATE);
+        Map<String, ?> allEntries = sharedPreferences.getAll();
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            String latinName = entry.getKey();
+            String[] plantDataArray = entry.getValue().toString().split("&");
+            String type = plantDataArray[0];
+            String sunlight = plantDataArray[1];
+            String water = plantDataArray[2];
+            String commonNames = plantDataArray[3];
+            String photoFilePath = plantDataArray[4];
+
+            // Create Plant object and add to the list
+            chosenPlants.add(new Plant(latinName, type, sunlight, water, commonNames, photoFilePath));
+        }
+
+        return chosenPlants;
+    }
 }
