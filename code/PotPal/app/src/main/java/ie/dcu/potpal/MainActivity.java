@@ -24,8 +24,10 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -171,22 +173,41 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Plant> getChosenPlants() {
         ArrayList<Plant> chosenPlants = new ArrayList<>();
+        Set<Integer> plantIds = new HashSet<>(); // Maintain a set of unique plant IDs
 
         SharedPreferences sharedPreferences = getSharedPreferences("ChosenPlants", Context.MODE_PRIVATE);
         Map<String, ?> allEntries = sharedPreferences.getAll();
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
-            String latinName = entry.getKey();
-            String[] plantDataArray = entry.getValue().toString().split("&");
-            String type = plantDataArray[0];
-            String sunlight = plantDataArray[1];
-            String water = plantDataArray[2];
-            String commonNames = plantDataArray[3];
-            String photoFilePath = plantDataArray[4];
-
-            // Create Plant object and add to the list
-            chosenPlants.add(new Plant(latinName, type, sunlight, water, commonNames, photoFilePath));
+            // Extract plantId from the key
+            int plantId = Integer.parseInt(entry.getKey().split("_")[0]);
+            if (!plantIds.contains(plantId)) { // Check if the plant with the same ID has already been added
+                Plant plant = getPlantFromSharedPreferences(plantId);
+                if (plant != null) {
+                    chosenPlants.add(plant);
+                    plantIds.add(plantId); // Add the plant ID to the set
+                }
+            }
         }
 
         return chosenPlants;
+    }
+
+    private Plant getPlantFromSharedPreferences(int plantId) {
+        SharedPreferences sharedPreferences = getSharedPreferences("ChosenPlants", Context.MODE_PRIVATE);
+        Integer id = sharedPreferences.getInt(plantId + "_id", 0);
+        String latinName = sharedPreferences.getString(plantId + "_latinName", "");
+        String type = sharedPreferences.getString(plantId + "_type", "");
+        String sunlight = sharedPreferences.getString(plantId + "_sunlight", "");
+        String water = sharedPreferences.getString(plantId + "_water", "");
+        String commonNames = sharedPreferences.getString(plantId + "_commonNames", "");
+        String photoFilePath = sharedPreferences.getString(plantId + "_photoFilePath", "");
+        String lastWatered = sharedPreferences.getString(plantId + "_lastWatered", "");
+
+        // Check if any required data is missing
+        if (!latinName.isEmpty() && !type.isEmpty() && !sunlight.isEmpty() && !water.isEmpty() && !photoFilePath.isEmpty()) {
+            return new Plant(id, latinName, type, sunlight, water, commonNames, photoFilePath, lastWatered);
+        } else {
+            return null;
+        }
     }
 }

@@ -25,44 +25,85 @@
             android:id="@+id/plantNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignTop="@id/plantImageView"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/plantImageView"
             android:text="Plant Name"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_toEndOf="@id/plantImageView"
-            android:layout_marginStart="16dp"
-            android:layout_alignTop="@id/plantImageView" />
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/commonNamesTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Common Names"
-            android:textSize="14sp"
-            android:layout_toEndOf="@id/plantImageView"
+        <ImageView
+            android:id="@+id/sunIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_below="@id/plantNameTextView"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="36dp"/>
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="3dp"
+            android:layout_toEndOf="@id/plantImageView"
+            app:tint="@color/yellow"
+            android:src="@drawable/ic_sun" />
 
         <TextView
-            android:id="@+id/plantTypeTextView"
+            android:id="@+id/sunlightTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Plant Type"
-            android:textSize="14sp"
+            android:layout_alignBottom="@id/sunIcon"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/sunIcon"
+            android:text="Sunlight Info"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/waterIcon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/sunIcon"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="4dp"
             android:layout_toEndOf="@id/plantImageView"
-            android:layout_below="@id/commonNamesTextView"
+            app:tint="@color/blue"
+            android:src="@drawable/ic_water" />
+
+        <TextView
+            android:id="@+id/waterTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/waterIcon"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/waterIcon"
+
+            android:text="Water Info"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/lastWateredTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="2dp" />
+            android:layout_toEndOf="@id/plantImageView"
+            android:text="Last watered: Never"
+            android:textSize="11sp" />
 
         <ImageButton
             android:id="@+id/removeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:background="@android:color/transparent"
-            app:tint="@color/red"
-            android:src="@android:drawable/ic_menu_delete" />
+            android:src="@android:drawable/ic_menu_delete"
+            app:tint="@color/red" />
+
+        <ImageButton
+            android:id="@+id/waterButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/transparent"
+            android:padding="3dp"
+            android:src="@drawable/ic_water" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

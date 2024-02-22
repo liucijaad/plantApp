@@ -41,27 +41,23 @@ public class ChosenPlantActivity extends AppCompatActivity {
             DatabaseConnector.copyDataBaseFromAssets(this);
             Log.d("LatinName", latinName);
             List<String> plantData = DatabaseConnector.fetchPlantData(latinName);
+            Glide.with(this).load(photoFilePath).into(plantImageView);
             if (plantData.size() > 1) {
-                SharedPreferences preferences = getSharedPreferences("PlantData", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("LatinName", latinName);
-                editor.putString("Type", plantData.get(0));
-                editor.putString("Sunlight", plantData.get(1));
-                editor.putString("Water", plantData.get(2));
-                editor.putString("CommonNames", plantData.get(3));
-                editor.apply();
+                // Generate a unique ID for the plant
+                int plantId = generateUniqueId();
 
-                Glide.with(this).load(photoFilePath).into(plantImageView);
+                // Save plant data to SharedPreferences with unique IDs
+                savePlantData(plantId, latinName, plantData, photoFilePath);
+
+                // Display plant information
                 plantNameTextView.setText("Latin Name: " + latinName);
                 typeTextView.setText("Type: " + plantData.get(0));
                 sunlightTextView.setText("Sunlight: " + plantData.get(1));
                 waterTextView.setText("Water: " + plantData.get(2));
                 commonNamesTextView.setText("Common Names: " + plantData.get(3));
-
-                saveChosenPlant(latinName, plantData);
             } else {
-                Glide.with(this).load(photoFilePath).into(plantImageView);
-                plantNameTextView.setText("We don't know this plant yet! Add it to our database :) (I'll do it on wednesday)");
+                // Handle case where plant data is not available
+                plantNameTextView.setText("We don't know this plant yet! Add it to our database :) (I'll do it on Wednesday)");
             }
         }
 
@@ -74,21 +70,23 @@ public class ChosenPlantActivity extends AppCompatActivity {
         });
     }
 
-    private void saveChosenPlant(String latinName, List<String> plantData) {
+    private int generateUniqueId() {
+        return (int) System.currentTimeMillis();
+    }
+
+    private void savePlantData(int plantId, String latinName, List<String> plantData, String photoFilePath) {
         SharedPreferences sharedPreferences = getSharedPreferences("ChosenPlants", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        String photoFilePath = getIntent().getStringExtra("photoFilePath");
-        Log.d("PHOTO", photoFilePath);
-        // Serialize the plantData list to a single string
-        StringBuilder plantDataString = new StringBuilder();
-        for (String data : plantData) {
-            plantDataString.append(data).append("&");
-        }
-        plantDataString.append(photoFilePath).append("&");
 
-
-        // Save the serialized plantData string with the Latin Name as the key
-        editor.putString(latinName, plantDataString.toString());
+        // Save plant data to SharedPreferences with unique IDs
+        editor.putInt(plantId + "_id", plantId);
+        editor.putString(plantId + "_latinName", latinName);
+        editor.putString(plantId + "_type", plantData.get(0));
+        editor.putString(plantId + "_sunlight", plantData.get(1));
+        editor.putString(plantId + "_water", plantData.get(2));
+        editor.putString(plantId + "_commonNames", plantData.get(3));
+        editor.putString(plantId + "_photoFilePath", photoFilePath);
+        editor.putString(plantId + "_lastWatered", "Never");
         editor.apply();
     }
 }
