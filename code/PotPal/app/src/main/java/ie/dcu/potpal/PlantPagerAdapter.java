@@ -59,6 +59,17 @@ public class PlantPagerAdapter extends RecyclerView.Adapter<PlantPagerAdapter.Pl
             holder.commonNamesTextView.setText("");
         }
 
+        if (position == 0) {
+            holder.leftArrow.setVisibility(View.GONE);
+            holder.rightArrow.setVisibility(View.VISIBLE);
+        } else if (position == getItemCount() - 1) {
+            holder.leftArrow.setVisibility(View.VISIBLE);
+            holder.rightArrow.setVisibility(View.GONE);
+        } else {
+            holder.leftArrow.setVisibility(View.VISIBLE);
+            holder.rightArrow.setVisibility(View.VISIBLE);
+        }
+
         // Set click listener for the select plant button
         holder.selectPlantButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,12 +101,17 @@ public class PlantPagerAdapter extends RecyclerView.Adapter<PlantPagerAdapter.Pl
         TextView plantNameTextView;
         TextView commonNamesTextView;
         Button selectPlantButton;
+        ImageView leftArrow;
+        ImageView rightArrow;
+
 
         public PlantViewHolder(@NonNull View itemView) {
             super(itemView);
             plantNameTextView = itemView.findViewById(R.id.plantNameTextView);
             commonNamesTextView = itemView.findViewById(R.id.commonNamesTextView);
             selectPlantButton = itemView.findViewById(R.id.selectPlantButton);
+            leftArrow = itemView.findViewById(R.id.leftArrow);
+            rightArrow = itemView.findViewById(R.id.rightArrow);
         }
     }
 }
