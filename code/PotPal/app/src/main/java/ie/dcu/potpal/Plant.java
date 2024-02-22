@@ -1,6 +1,8 @@
 package ie.dcu.potpal;
 
-public class Plant {
+import java.io.Serializable;
+
+public class Plant implements Serializable {
     private Integer id;
     private String scientificName;
     private String type;

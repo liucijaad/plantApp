@@ -3,6 +3,7 @@ package ie.dcu.potpal;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -93,6 +94,17 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> 
                     int position = getAdapterPosition();
                     waterButton.setColorFilter(ContextCompat.getColor(context, R.color.blue));
                     updateLastWatered(position);
+                }
+            });
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    Plant plant = plants.get(position);
+                    Intent intent = new Intent(context, PlantProfileActivity.class);
+                    intent.putExtra("plant", plant);
+                    context.startActivity(intent);
                 }
             });
         }
