@@ -1,0 +1,27 @@
+# PotPal User Manual
+
+# 0.Table of Contents
+## 1.Introduction
+## 2.Glossary
+## 3.Features
+## 4.Installation
+## 5.User Interface
+## 6.Creating a Plant Profile
+## 7.Logging and Activity
+## 8.Troubleshooting
+
+# 1.Introduction
+
+# 2.Glossary
+
+# 3.Features
+
+# 4.Installation
+
+# 5.User Interface
+
+# 6.Creating a Plant Profile
+
+# 7.Logging an Activity
+
+# 8.Troubleshooting
