@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -166,7 +167,15 @@ public class MainActivity extends AppCompatActivity {
                 intent.putStringArrayListExtra("ThirdPlant", (ArrayList<String>) ThirdPlant);
                 startActivity(intent);
             } else {
-                Log.d("PlantIdentify", "No results available");
+                Snackbar.make(findViewById(android.R.id.content), "Couldn't identify the plant. Please try again.", Snackbar.LENGTH_LONG)
+                        .setDuration(7000)
+                        .setAction("Retake Photo", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                takePicture(); // Retake the photo if the user clicks on the action
+                            }
+                        })
+                        .show();
             }
         }
     }

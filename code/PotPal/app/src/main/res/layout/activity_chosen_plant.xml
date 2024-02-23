@@ -9,7 +9,8 @@
         android:layout_height="350dp"
         android:layout_centerHorizontal="true"
         android:scaleType="centerCrop"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:src="@android:drawable/ic_menu_gallery"/>
 
     <TextView
         android:id="@+id/chosenPlantNameTextView"
@@ -19,7 +20,8 @@
         android:layout_below="@id/plantImageView"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
+        android:layout_marginBottom="8dp"
+        android:text="Latin Name"/>
 
     <TextView
         android:id="@+id/chosenCommonNamesTextView"
@@ -27,7 +29,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/chosenPlantNameTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:text="Common Names"/>
 
     <TextView
         android:id="@+id/typeTextView"
@@ -35,7 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/chosenCommonNamesTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="20dp"
+        android:text="Type"/>
 
     <Spinner
         android:id="@+id/plantTypeSpinner"
@@ -53,7 +57,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/typeTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:text="Sunlight"/>
 
     <TextView
         android:id="@+id/waterTextView"
@@ -61,7 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/sunlightSeekBar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:text="Water"/>
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/waterSeekBar"

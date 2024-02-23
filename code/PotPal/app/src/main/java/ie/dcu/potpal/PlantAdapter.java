@@ -115,12 +115,19 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> 
             SharedPreferences.Editor editor = sharedPreferences.edit();
             // Update last watered time
             editor.putString(plant.getId() + "_lastWatered", getCurrentDateTime());
+            String timestampsString = sharedPreferences.getString(plant.getId() + "_timestamps", "");
+            StringBuilder newTimestampsString = new StringBuilder(timestampsString);
+            if (!timestampsString.isEmpty()) {
+                newTimestampsString.append("\n");
+            }
+            newTimestampsString.append(getCurrentDateTime());
+            editor.putString(plant.getId() + "_timestamps", newTimestampsString.toString());
             editor.apply();
             lastWateredTextView.setText("Last watered: " + getCurrentDateTime());
         }
 
         private String getCurrentDateTime() {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault());
             return sdf.format(new Date());
         }
     }
