@@ -1,0 +1,105 @@
+# Technical Specification
+
+# 0. Table of contents
+## 1. Introduction
+### 1.1 Overview
+### 1.2 Glossary
+## 2. System Architecture
+## 3. High-Level Design
+## 4. Problems and Resolution
+## 5. Testing
+### 5.1 Unit Testing
+### 5.2 User Testing
+#### 5.2.1 User A.
+#### 5.2.2 User B.
+## 6. Installation Guide
+
+# 1. Introduction
+## 1.1 Overview
+
+PotPal is an Android application. The primary objective of this application is to streamline, simplify and enhance the process of caring for indoor plants. With this app, users can effortlessly add their plants to the tracker, and then the app will allow them to create their plant profile.  
+  
+By creating a plant profile, users can take a picture of the plant with the app, and PotPal will identify the plant’s category (desert, cacti, tropical, etc.). Based on the category and environmental conditions the application will suggest personal care schedules. Users then are able to log care activities and the application will warn them if the plants are not getting the correct amount of water. Notifications will be used to remind the users about plant watering days.
+
+## 1.2 Glossary
+
+# 2. System Architecture
+
+The system architecture can be delineated into three main modules:
+
+*User Interface (UI)*
+
+This module encompasses the frontend components responsible for user interaction. It includes screens for plant identification, care schedules, health monitoring, user authentication, and notification preferences. The UI interacts with backend components to fetch and display relevant data.
+
+*Backend Services*
+
+This module, hosted on the server, consists of backend services responsible for handling user authentication, plant identification using the PlantNet API, managing user data in the SQLite database, generating personalised care schedules, and monitoring plant watering habits.
+
+*Third-Party Integration*
+
+The PlantNet API serves as a crucial third-party component integrated into the backend for plant identification. Additionally, the application utilises Android's built-in notification system for delivering reminders and alerts.
+
+# 3. High-Level Design
+
+![class diagram](https://media.discordapp.net/attachments/892046097000853535/1210331184383655958/image.png?ex=65ea2bc1&is=65d7b6c1&hm=dbe5e27fa11cf68acef4dccb0ef6587cfa06877b72bb5936907f2a96f32c7a68&=&format=webp&quality=lossless&width=960&height=464)
+
+*AddPlantActivity* class gets plant information, initializes ViewPager 2 and its adapter.
+
+*ChosenPlantActivity* class gets chosen plant information, displays it and saves it to SharedPreferences with unique IDs.
+
+*DatabaseConnector* class is responsible for fetching and inserting information from and to SQLite database.
+
+*MainActivity* is a class .... . It includes PlantIdentifyTask class.
+
+*Plant* class saves all relevant plant information.
+
+*PlantAdapter* class ???
+
+*PlantIdentify* class sends the image to the PlantNet API, extracts and returns information of 3 best possible matches.
+
+*PlantIdentifyTask* class gets picture taken by the user and calls PlantIdentify's method findPlantNames(). This class is part of MainActivity class.
+
+*PlantPagerAdapter* class ???.
+
+*PlantViewHolder* class ???. This class is part of PlantPageAdapter class.
+
+*ViewHolder* class ???. This class is part of PlantAdapter class.
+
+# 4. Problems and Resolution
+
+*Dependency Management*
+
+During development, various libraries were used to aid in functionality of the application. Manually installing and linking libraries across devices has become cumbersome and a dependency manager was needed. It was decided to use Gradle as our dependency manager for the project.
+
+*Cloud Data Storage*
+
+During the development, an idea to host pictures taken by an user and the database on the cloud was raised. Unfortunately, no suitable and accessible service was found and this idea was abandoned.
+
+# 5. Testing
+
+## 5.1 Unit Testing
+
+## 5.2 User Testing
+
+During user testing, two users, A. and B., were surveyd about their experience with the application. These questions were asked during the survey:
+
+1. How would describe the purpose of this application?
+2. How useful would this application be to you?
+3. How would you rate your overall experience in creating a plant profile on this application?
+4. What was the most difficult part during plant profile creation?
+5. If you were to review PotPal, what score would you give it out of 10?
+6. What were your first impressions with the application?
+7. Is there anything you would change about how the application works?
+
+### 5.2.1 User A.
+
+User A is a college student and a novice gardener who owns multiple plants in his apartment. Currently he does not use any applications to help him with plant care.
+During the survey, he understood the purpose of the application but mentioned that he did not find the application useful as it lacked more features related to plant care. Overall, he rated his experience as satisfactory when creating a plant profile and mentioned a clean, minimalistic user interface as one of the application's strengths. Considering his experience using mobile applications, he did not find it difficult to navigate and use the application but expressed concerns that less experienced or older people might have problems navigating the user interface. His first impressions were positive, and he would give the application 6 out of 10. He suggested adding an interactive tutorial for first-time users in the future.
+
+### 5.2.2 User B.
+
+User B. is an experienced gardener who owns multiple household plants. She is currently in her 40s and does not use any applications to aid her in plant care.
+During the survey, she expressed that she wasn't sure how the application would help her and what features did it offer. She noted lack of instructions on first-time use and had to resort to "clicking various buttons to see what they do". Because of lack of instructions, she found the process of plant profile creation unclear and frustrating, mentioning that the hardest part was to start the profile creation. During review, she gave the application a score of 3 out of 10. While her first impressions of the application were positive, lack of tutorial or instructions made using the application confusing and frustrating. She suggested adding more information about the features of the application, as well as offering a tutorial for first-time users.
+
+
+# 6. Installation Guide

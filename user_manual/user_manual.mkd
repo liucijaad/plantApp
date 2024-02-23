@@ -1,0 +1,62 @@
+# PotPal User Manual
+
+# 0.Table of Contents
+## 1. Introduction
+## 2. Adding a new plant
+## 3. Watering a plant
+## 4. Viewing your plant profile
+## 5. Removing a plant
+# 1.Introduction
+Welcome to the **PotPal** User Manual!
+This user manual serves as a comprehensive guide to help you navigate and maximize the features of **PotPal**. Whether you're looking to learn how to add a new plant, log watering activities, or troubleshoot any issues you encounter, this manual provides step-by-step instructions and helpful tips to ensure you get the most out of your PotPal experience.
+# 2. Adding a new plant
+When you first install **PotPal**, you will be greeted by an empty list of plants. Worry not, the process of adding your plants to your in-app garden is very simple. To start the process, tap the button in the bottom-right corner! This will open your Camera app. Your photo should ideally include a clear bright view of your plant's leaf or flower. Do not worry if your photo came out blurry, you can try again. Once you're happy with your picture, the app will send it for identification. It might take up to a few seconds. If the identification fails, you will be promptly notified about it.
+<p align="center">
+<img src="https://cdn.discordapp.com/attachments/766607481979535380/1210413080542974043/Screenshot_20240223-022910_PotPal.jpg?ex=65ea7806&is=65d80306&hm=db97a7e6ec923f6f26c62ae14832f6fc4155350f2f2b81736d6057720fa8987a&" alt="Plant Result" width="400"/>
+</p>
+Upon successful plant identification, you will see one of the three most probable matches. You can swipe left or right to view your matches. The arrows at the bottom indicate which way you can swipe to see another plant. Now it's up to you to decide which plant matches your own best. Press the button to choose the matching plant species.
+<p align="center">
+<img src="https://cdn.discordapp.com/attachments/766607481979535380/1210405516061450301/Screenshot_20240223-015842_PotPal.jpg?ex=65ea70fb&is=65d7fbfb&hm=bcf76792e9e11cc0dcf482d32902d6acdeb8f494a1b4f7431714a0ecc6876163&" alt="Plant Result" width="220"/>
+</p>
+When you choose the plant species, there are two possible outcomes:
+
+1. **Your plant is in our database!**
+Great news! We already know about your plant and have automatically created its profile for you. It includes details such as its watering needs, sunlight needs, type and common names. You can not tap the "Finish" button to add this plant to your collection.
+<p align="center">
+<img src="https://cdn.discordapp.com/attachments/766607481979535380/1210405516346400779/Screenshot_20240223-015859_PotPal.jpg?ex=65ea70fb&is=65d7fbfb&hm=596d000beedb8a7e5f1ef62b51029e463cde24c08ecd331dffd42ce50bdb5aac&" alt="Plant Result" width="220"/>
+</p>
+2. **Your plant is NOT in our database**
+Even though our database includes a great variety of common plants all over the world, we did not have yours! In this case, you will need to input your plant details yourself. You can choose your plant type from a simple dropdown menu at the bottom. Adjust the sliders to set your plant's sunlight and watering needs. You have 6 water levels to choose from:
+
+- Dry  
+- Dry Mesic
+- Mesic
+- Wet Mesic
+- Wet  
+- In Water
+
+And 5 sunlight levels:
+- Full Shade
+- Dappled Shade
+- Partial Shade 
+- Full Sunlight
+
+<p align="center">
+<img src="https://cdn.discordapp.com/attachments/766607481979535380/1210408696937717790/Screenshot_20240223-021126_PotPal.jpg?ex=65ea73f1&is=65d7fef1&hm=02eaddc38679cc94d67a6a7a21ca80f3f3c1139d0bc6ab0c78aa3013a90b7b6d&" alt="Plant Result" width="220"/>
+</p>
+
+Congratulations! You have just added a plant to your collection. You can now add as many plants as you want.
+
+# 3. Watering a plant
+Whenever you water your plant, you can tap on the water droplet icon located in the bottom-right corner of each plant's card. The icon will turn blue and your "Last Watered" date will update to help you keep track of whether or not you have watered your plant recently or not!
+<p align="center">
+<img src="https://cdn.discordapp.com/attachments/766607481979535380/1210412638824046613/Screenshot_20240223-022702_PotPal.jpg?ex=65ea779d&is=65d8029d&hm=05baec79ffa8a4f6607a204a50beb8d0e2ff8b3cd045d30d513a6bca8603f63b&" alt="Plant Result" width="400"/>
+</p>
+# 4. Viewing your plant profile
+When you tap on your plant card, you will be able to view the plant's profile, which includes slightly more details about your plant. From there, you can also see a full history of your plant watering, so you'll never lose track of whether your plant needs watering or not!
+
+# 5. Removing a plant
+If for any reason you would like to remove a plant from your application, you can simply do that by pressing a little trash icon located at the top-right corner of each plant's card. To prevent accidental plant removal, we added a prompt to confirm your decision, so it's safer to navigate around the app.
+<p align="center">
+<img src="https://cdn.discordapp.com/attachments/766607481979535380/1210411515019001906/Screenshot_20240223-022301_PotPal.jpg?ex=65ea7691&is=65d80191&hm=6ad64dbc824dbc9ad66e5aa062d7c2ca9ccc04593257aecfe8c552f2054b0a22&" alt="Plant Result" width="220"/>
+</p>
