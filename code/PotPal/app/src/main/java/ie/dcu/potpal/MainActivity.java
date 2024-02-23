@@ -10,7 +10,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -19,8 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,10 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private RecyclerView plantsRecView;
-    private TextView textViewPlantName;
-    private TextView textViewEnvironment;
-    private TextView textViewPlantType;
-    private TextView textViewImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
