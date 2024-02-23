@@ -1,8 +1,6 @@
 package ie.dcu.potpal;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 import java.util.ArrayList;

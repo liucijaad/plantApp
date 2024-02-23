@@ -7,14 +7,6 @@
     android:layout_height="match_parent"
     android:paddingTop="20dp">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/bottom_nav_menu" />
-
     <RelativeLayout
         android:id="@+id/placeholderLayout"
         android:layout_width="match_parent"
@@ -47,14 +39,14 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_above="@id/nav_view"
-        android:src="@drawable/ic_add" />
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="@color/green"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/plantsRecView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/nav_view"
         android:layout_marginBottom="50dp"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp" />

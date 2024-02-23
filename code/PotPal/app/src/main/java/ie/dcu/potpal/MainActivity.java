@@ -1,8 +1,10 @@
 package ie.dcu.potpal;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,17 +12,15 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,11 +33,8 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int REQUEST_PICK_IMAGE = 2;
     private RecyclerView plantsRecView;
-    private TextView textViewPlantName;
-    private TextView textViewEnvironment;
-    private TextView textViewPlantType;
-    private TextView textViewImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,17 +88,38 @@ public class MainActivity extends AppCompatActivity {
     private File photoFile;
 
     private void takePicture() {
+        // Create an AlertDialog.Builder instance
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Identify a plant");
+        builder.setMessage("Would you like to take a new picture or choose one from your gallery?");
+
+        // Add the buttons for each option
+        builder.setPositiveButton("Take a New Picture", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dispatchTakePictureIntent(); // Start the process to take a new picture
+            }
+        });
+        builder.setNegativeButton("Choose from Gallery", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dispatchChooseFromGalleryIntent(); // Start the process to choose from gallery
+            }
+        });
+
+        // Create and show the AlertDialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+    private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            // Create the File where the photo should go
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
-                // Handle the error
                 ex.printStackTrace();
             }
 
-            // Continue only if the File was successfully created
             if (photoFile != null) {
                 Uri photoUri = FileProvider.getUriForFile(this, "ie.dcu.potpal.fileprovider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
@@ -110,7 +128,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private String mCurrentPhotoPath;
+    private void dispatchChooseFromGalleryIntent() {
+        Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        pickPhotoIntent.setType("image/*");
+        startActivityForResult(pickPhotoIntent, REQUEST_PICK_IMAGE);
+    }
+
 
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -122,18 +145,41 @@ public class MainActivity extends AppCompatActivity {
                 storageDir      /* directory */
         );
 
-        // Save a file path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            // Image is stored in the photoFile, use it for identification
-            executePlantIdentifyTask(photoFile);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_IMAGE_CAPTURE) {
+                executePlantIdentifyTask(photoFile);
+            } else if (requestCode == REQUEST_PICK_IMAGE) {
+                if (data != null) {
+                    Uri selectedImageUri = data.getData();
+                    String imagePath = getRealPathFromURI(selectedImageUri);
+                    if (imagePath != null) {
+                        photoFile = new File(imagePath);
+                        executePlantIdentifyTask(photoFile);
+                    } else {
+                        Snackbar.make(findViewById(android.R.id.content), "Failed to load image", Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+            }
         }
+    }
+
+    private String getRealPathFromURI(Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            String path = cursor.getString(columnIndex);
+            cursor.close();
+            return path;
+        }
+        return null;
     }
 
     private void executePlantIdentifyTask(File imageFile) {
@@ -168,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             } else {
                 Snackbar.make(findViewById(android.R.id.content), "Couldn't identify the plant. Please try again.", Snackbar.LENGTH_LONG)
-                        .setDuration(7000)
+                        .setDuration(7000) // Display the message for 7 seconds
                         .setAction("Retake Photo", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
