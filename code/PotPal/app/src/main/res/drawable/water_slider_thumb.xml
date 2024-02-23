@@ -1,0 +1,9 @@
+<!-- custom_thumb.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <gradient
+        android:angle="90"
+        android:startColor="#BFE6FF"
+        android:endColor="#6BA9FF" />
+    <size android:width="20dp" android:height="20dp"/>
+</shape>

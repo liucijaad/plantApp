@@ -22,12 +22,30 @@
         android:layout_marginBottom="8dp"/>
 
     <TextView
-        android:id="@+id/typeTextView"
+        android:id="@+id/chosenCommonNamesTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/chosenPlantNameTextView"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/typeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chosenCommonNamesTextView"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"/>
+
+    <Spinner
+        android:id="@+id/plantTypeSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/waterSeekBar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:entries="@array/plant_types"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/sunlightTextView"
@@ -35,30 +53,51 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/typeTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="20dp"/>
 
     <TextView
         android:id="@+id/waterTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sunlightTextView"
+        android:layout_below="@id/sunlightSeekBar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:id="@+id/chosenCommonNamesTextView"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/waterSeekBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/waterTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"/>
+        android:max="5"
+        android:splitTrack="false"
+        android:progressDrawable="@drawable/water_slider_background"
+        android:thumb="@drawable/water_slider_thumb"
+        android:thumbOffset="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginHorizontal="30dp"
+        android:visibility="gone"/>
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/sunlightSeekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sunlightTextView"
+        android:max="3"
+        android:splitTrack="false"
+        android:progressDrawable="@drawable/sunlight_slider_background"
+        android:thumb="@drawable/sunlight_slider_thumb"
+        android:thumbOffset="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginHorizontal="30dp"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/finishButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/chosenCommonNamesTextView"
+       android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
         android:text="Finish" />
 </RelativeLayout>

@@ -21,6 +21,7 @@ public class PlantPagerAdapter extends RecyclerView.Adapter<PlantPagerAdapter.Pl
     private Context context;
     private ArrayList<ArrayList<String>> plantInfo;
     private String photoFilePath;
+    private String commonNames;
 
     public PlantPagerAdapter(Context context, ArrayList<String> firstPlant, ArrayList<String> secondPlant, ArrayList<String> thirdPlant, String photoFilePath) {
         this.context = context;
@@ -45,14 +46,15 @@ public class PlantPagerAdapter extends RecyclerView.Adapter<PlantPagerAdapter.Pl
 
         // Join common names with comma if present
         if (currentPlant.size() > 4) {
-            StringBuilder commonNames = new StringBuilder();
+            StringBuilder commonNamesStringBuilder = new StringBuilder();
             for (int i = 1; i < currentPlant.size() - 3; i++) {
-                commonNames.append(currentPlant.get(i));
+                commonNamesStringBuilder.append(currentPlant.get(i));
                 if (i < currentPlant.size() - 4) {
-                    commonNames.append(", ");
+                    commonNamesStringBuilder.append(", ");
                 }
             }
-            holder.commonNamesTextView.setText(commonNames.toString());
+            commonNames = commonNamesStringBuilder.toString();
+            holder.commonNamesTextView.setText(commonNames);
         } else if (currentPlant.size() == 4) {
             holder.commonNamesTextView.setText("No common names");
         } else {
@@ -77,6 +79,7 @@ public class PlantPagerAdapter extends RecyclerView.Adapter<PlantPagerAdapter.Pl
                 // Start a new activity and pass the chosen plant information as extras
                 Intent intent = new Intent(context, ChosenPlantActivity.class);
                 intent.putExtra("photoFilePath", photoFilePath);
+                intent.putExtra("commonNames", commonNames);
                 intent.putStringArrayListExtra("ChosenPlant", currentPlant);
                 context.startActivity(intent);
                 ((Activity) context).finish();

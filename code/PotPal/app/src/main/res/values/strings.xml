@@ -11,16 +11,33 @@
     <string name="select_plant_type">Select Plant Type</string>
     <string name="save_plant">Save Plant</string>
 
-    <string-array name="environment_options">
-        <item>Indoor</item>
-        <item>Outdoor</item>
+    <string-array name="water_levels">
+        <item>Dry</item>
+        <item>Dry Mesic</item>
+        <item>Mesic</item>
+        <item>Wet Mesic</item>
+        <item>Wet</item>
+        <item>In Water</item>
     </string-array>
 
-    <string-array name="plant_type_options">
-        <item>Flowering</item>
-        <item>Foliage</item>
+    <string-array name="plant_types">
         <item>Cactus</item>
-        <!-- Add more types as needed -->
+        <item>Succulent</item>
+        <item>Shrub</item>
+        <item>Grass</item>
+        <item>Grass-like</item>
+        <item>Tree</item>
+        <item>Fern</item>
+        <item>Herb</item>
+        <item>Forb</item>
+        <item>Vine</item>
+    </string-array>
+
+    <string-array name="sunlight_levels">
+        <item>Full Shade</item>
+        <item>Dappled Shade</item>
+        <item>Partial Shade</item>
+        <item>Full Sunlight</item>
     </string-array>
 
 </resources>
