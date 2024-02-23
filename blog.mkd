@@ -1,5 +1,7 @@
 #Blog
 
+## Link: https://docs.google.com/document/d/1Y2QWkZPygT0K4lKdeTA5daKGeS6PrVYln5aRE4dJE_Y/edit?usp=sharing
+
 ## 28/09/23
 We have decided to create an Android application. Its main function would be to identify plants from the picture taken by the user and suggest a watering schedule for that specific plant. We have not decided on the name, user interface or how to achieve these functions yet. We are currently looking for a supervisor for our project. The repository to create the project was created and we have started working on the project proposal.
 
