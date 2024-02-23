@@ -71,7 +71,7 @@ This module, hosted on the server, consists of backend services responsible for 
 
   
 
-The PlantNet API serves as a crucial third-party component integrated into the backend for plant identification. Additionally, the application utilises Android's built-in notification system for delivering reminders and alerts.
+The PlantNet API serves as a crucial third-party component integrated into the backend for plant identification. Currently, as the application is still in the development stage, it operates on whitelist of IP addresses. Additionally, the application utilises Android's built-in notification system for delivering reminders and alerts.
 
   
 
@@ -178,3 +178,13 @@ During the survey, she expressed that she wasn't sure how the application would 
   
 
 # 6. Installation Guide
+
+**1. Download PotPal APK**
+
+First, download the newest release of PotPal APK from GitLab (https://gitlab.computing.dcu.ie/adomavp2/2024-ca326-ladomaviciute-plant-app/-/releases). Select "PotPal APK Download" from "Packages" section.
+
+**2. Install PotPal**
+
+On your device, navigate to the download location of the APK (default: My Files/Downloads). Tap on the APK file. Make sure you have "Install unknown apps" enabled in your device's settings. Select "Install".
+
+Once the installation has finished, the application is ready for use.
