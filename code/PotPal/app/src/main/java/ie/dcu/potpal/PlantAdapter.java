@@ -118,7 +118,7 @@ public class PlantAdapter extends RecyclerView.Adapter<PlantAdapter.ViewHolder> 
             String timestampsString = sharedPreferences.getString(plant.getId() + "_timestamps", "");
             StringBuilder newTimestampsString = new StringBuilder(timestampsString);
             if (!timestampsString.isEmpty()) {
-                newTimestampsString.append("\n");
+                newTimestampsString.append("&");
             }
             newTimestampsString.append(getCurrentDateTime());
             editor.putString(plant.getId() + "_timestamps", newTimestampsString.toString());

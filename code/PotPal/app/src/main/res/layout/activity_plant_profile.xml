@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
     <ImageView
         android:id="@+id/plantImageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:scaleType="centerCrop"
         android:src="@android:drawable/ic_menu_gallery"
         android:layout_marginEnd="16dp"
@@ -35,27 +36,64 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp" />
 
+    <View
+        android:id="@+id/dividerLine"
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:layout_below="@id/plantImageView"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/black" />
+
+    <ImageView
+        android:id="@+id/sunIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/dividerLine"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="20dp"
+        app:tint="@color/yellow"
+        android:src="@drawable/ic_sun" />
+
     <TextView
         android:id="@+id/sunlightTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sunlight Info"
         android:textSize="18sp"
-        android:layout_below="@id/commonNamesTextView"
-        android:layout_toEndOf="@id/plantImageView"
+        android:layout_below="@id/dividerLine"
+        android:layout_toEndOf="@id/sunIcon"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="20dp"/>
 
+    <ImageView
+        android:id="@+id/waterIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/sunIcon"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        app:tint="@color/blue"
+        android:src="@drawable/ic_water" />
     <TextView
         android:id="@+id/waterTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Water Info"
         android:textSize="18sp"
-        android:layout_below="@id/sunlightTextView"
-        android:layout_toEndOf="@id/plantImageView"
+        android:layout_below="@id/sunIcon"
+        android:layout_toEndOf="@id/waterIcon"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="14dp" />
+
+    <ImageView
+        android:id="@+id/typeIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@id/waterIcon"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        app:tint="@color/green"
+        android:src="@drawable/ic_tree" />
 
     <TextView
         android:id="@+id/typeTextView"
@@ -63,9 +101,42 @@
         android:layout_height="wrap_content"
         android:text="Plant Type"
         android:textSize="18sp"
-        android:layout_below="@id/waterTextView"
-        android:layout_toEndOf="@id/plantImageView"
+        android:layout_below="@id/waterIcon"
+        android:layout_toEndOf="@id/typeIcon"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="14dp" />
 
+    <View
+        android:id="@+id/dividerLine2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/typeIcon"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/black" />
+
+    <TextView
+        android:id="@+id/wateringHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Watering History"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_below="@id/dividerLine2"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp" />
+
+    <ScrollView
+        android:id="@+id/wateringScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/wateringHistory"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="12dp">
+
+        <LinearLayout
+            android:id="@+id/wateringTimestampsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 </RelativeLayout>
